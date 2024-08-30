@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Loader from './utils/loader'
@@ -16,6 +16,35 @@ function App() {
       JEASINGS.update();
     });
   }
+  const handleKeyDown = (event) => {
+    console.log(event.key, " clicked");
+    switch (event.key) {
+      case "ArrowUp":
+        camera.current.position.z -= 0.02;
+        control.current.target.z -= 0.02;
+        break;
+      case "ArrowDown":
+        camera.current.position.z += 0.02;
+        control.current.target.z += 0.02;
+        break;
+      case "ArrowLeft":
+        camera.current.position.x -= 0.02;
+        control.current.target.x -= 0.02;
+        break;
+      case "ArrowRight":
+        camera.current.position.x += 0.02;
+        control.current.target.x += 0.02;
+        break;
+      default:
+        break;
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
   const annotate = [
     {
       title: "Normal View",
@@ -49,8 +78,9 @@ function App() {
   const buttons = annotate.map(({ title, lookAt, position }) => (
     <button
       key={title}
+      type="reset"
       onClick={() => {
-        console.log(title, " clicked");
+        // console.log(title, " clicked");
         new JEASINGS.JEasing(control.current.target)
           .to(
             {
@@ -97,7 +127,7 @@ function App() {
               files="/hdris/sky.hdr"
               background
               backgroundBlurriness={0}
-              backgroundRotation={[0, Math.PI / 8, 0]}
+              backgroundRotation={[0, Math.PI, 0]}
             />
             <JEasings />
           </Suspense>
