@@ -20,20 +20,28 @@ function App() {
     console.log(event.key, " clicked");
     switch (event.key) {
       case "ArrowUp":
-        camera.current.position.z -= 0.02;
-        control.current.target.z -= 0.02;
+        if (Math.abs(camera.current.position.z - 0.2)<5){
+          camera.current.position.z -= 0.02;
+          control.current.target.z -= 0.02;
+        }
         break;
       case "ArrowDown":
-        camera.current.position.z += 0.02;
-        control.current.target.z += 0.02;
+        if (Math.abs(camera.current.position.z + 0.2) < 5) {
+          camera.current.position.z += 0.02;
+          control.current.target.z += 0.02;
+        }
         break;
       case "ArrowLeft":
-        camera.current.position.x -= 0.02;
-        control.current.target.x -= 0.02;
+        if (Math.abs(camera.current.position.x - 0.2) < 5){
+          camera.current.position.x -= 0.02;
+          control.current.target.x -= 0.02;
+        }
         break;
       case "ArrowRight":
-        camera.current.position.x += 0.02;
-        control.current.target.x += 0.02;
+        if (Math.abs(camera.current.position.x + 0.2) < 5) {
+          camera.current.position.x += 0.02;
+          control.current.target.x += 0.02;
+        }
         break;
       default:
         break;
