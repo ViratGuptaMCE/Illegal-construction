@@ -3,6 +3,8 @@ import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Loader from './utils/loader'
 import { City1 } from './assets/models/city1'
+import { Hut } from './assets/models/hut'
+import { Stairs } from './assets/models/stairs'
 import { Tent } from './assets/models/tent'
 import { Tent2 } from './assets/models/tent2'
 import { Tent3 } from './assets/models/tent3'
@@ -55,12 +57,16 @@ function App() {
         break;
     }
   };
+
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+
   const annotate = [
     {
       title: "Normal View",
@@ -136,13 +142,19 @@ function App() {
         >
           <Suspense fallback={<Loader />}>
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
+            {/* <Stairs position={[200,0,400] } scale={0.1} /> */}
 
-            {/* <Tent scale={0.001} position={[0, -0.1, -2.3]} /> */}
+            {/* <Tent scale={0.001} position={[-1.5, -0.1, -3]} /> */}
             {/* <Tent2 scale={0.007} position={[-1, -0.1, -3]} /> */}
             {/* <Tent3 scale={0.001} position={[1, -0.1, -3]} /> */}
-            <Tent4 scale={0.3} position={[-1.2, -0.1, 2.2]} />
-            <Tent5 scale={0.001} position={[3, -0.1, 2.2]} />
-            <Tool scale={0.1} position={[0, -0.2, -2.2]} />
+            <Hut
+              scale={0.1}
+              position={[2, -0.3, -2.8]}
+              // rotation={[-1 * Math.PI, 0, 0]}
+            />
+            <ambientLight intensity={4} color={'orange'}/>
+            <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} />
+            {/* <Tool scale={0.08} position={[3, -0.1, 2.5]} /> */}
 
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 6]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />

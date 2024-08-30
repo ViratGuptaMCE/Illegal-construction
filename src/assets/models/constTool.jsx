@@ -8,7 +8,7 @@ export function Tool(props) {
     <group {...props} dispose={null}>
       <group scale={0.01}>
         <ambientLight intensity={1} />
-        <Soil scale={380} rotation={[0, -5*Math.PI / 4, 0]} position={[0,-170,-300]} />
+        <Soil scale={380} rotation={[0, -5*Math.PI / 4, 0]} position={[0,-120,-300]} />
         <group
           position={[-947.251, 0, -198.034]}
           rotation={[-Math.PI / 2, 0, 1.222]}
