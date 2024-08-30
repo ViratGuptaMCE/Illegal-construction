@@ -3,9 +3,17 @@ import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Loader from './utils/loader'
 import { City1 } from './assets/models/city1'
+import { Tent } from './assets/models/tent'
+import { Tent2 } from './assets/models/tent2'
+import { Tent3 } from './assets/models/tent3'
+import { Tent4 } from './assets/models/tent4'
+import { Tent5 } from './assets/models/tent5'
+import { Tool } from './assets/models/constTool'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Environment } from '@react-three/drei'
 import JEASINGS from "https://esm.sh/jeasings";
+
+
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -128,6 +136,14 @@ function App() {
         >
           <Suspense fallback={<Loader />}>
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
+
+            {/* <Tent scale={0.001} position={[0, -0.1, -2.3]} /> */}
+            {/* <Tent2 scale={0.007} position={[-1, -0.1, -3]} /> */}
+            {/* <Tent3 scale={0.001} position={[1, -0.1, -3]} /> */}
+            <Tent4 scale={0.3} position={[-1.2, -0.1, 2.2]} />
+            <Tent5 scale={0.001} position={[3, -0.1, 2.2]} />
+            <Tool scale={0.1} position={[0, -0.2, -2.2]} />
+
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 6]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />
             {/* <ambientLight intensity={50}/> */}
