@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-*camera.html
+/src/camera.html
