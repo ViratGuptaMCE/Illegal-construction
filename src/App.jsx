@@ -4,6 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import Loader from './utils/loader'
 import { City1 } from './assets/models/city1'
 import { Hut } from './assets/models/hut'
+import RandomHut from './utils/randomHut'
 import { Stairs } from './assets/models/stairs'
 import { Tent } from './assets/models/tent'
 import { Tent2 } from './assets/models/tent2'
@@ -19,7 +20,9 @@ import JEASINGS from "https://esm.sh/jeasings";
 
 
 function App() {
-  const [isContructAdded, setIsContructAdded] = useState(true)
+  const [isContructAdded, setIsContructAdded] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
+
   const camera = useRef();
   const control = useRef();
   function JEasings() {
@@ -141,20 +144,21 @@ function App() {
         <Canvas className={`w-full h-screen bg-transparent`}>
           <Suspense fallback={<Loader />}>
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
+            {isChanged && <RandomHut />}
             {/* <Stairs position={[200,0,400] } scale={0.1} /> */}
 
             {/* <Tent scale={0.001} position={[-1.5, -0.1, -3]} /> */}
             {/* <Tent2 scale={0.007} position={[-1, -0.1, -3]} /> */}
             {/* <Tent3 scale={0.001} position={[1, -0.1, -3]} /> */}
-            <Hut
+            {/* <Tent4 scale={0.3} position={[1, -0.1, -3]} /> */}
+            {isContructAdded && <RandomSite />}
+            {/* <Hut
               scale={0.1}
               position={[2, -0.3, -2.8]}
               // rotation={[-1 * Math.PI, 0, 0]}
-            />
-            {isContructAdded && <RandomSite />}
-            <ambientLight intensity={4} color={"orange"} />
-            <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} />
-            {/* <Tool scale={0.08} position={[3, -0.1, 2.5]} /> */}
+            /> */}
+            {/* <ambientLight intensity={4} color={"orange"} /> */}
+            {/* <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} /> */}
 
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 6]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />
@@ -175,15 +179,18 @@ function App() {
           <button
             className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
               isContructAdded ? "bg-slate-700" : "bg-[#1fb3eef9]"
-              }`}
-            onClick={()=>setIsContructAdded(!isContructAdded)}
+            }`}
+            onClick={() => setIsContructAdded(!isContructAdded)}
           >
-            {`${
-              isContructAdded ? "Remove" : "Add"
-            } Construction Site`}
+            {`${isContructAdded ? "Remove" : "Add"} Construction Site`}
           </button>
-          <button className="w-full bg-[#eeb71ff9] font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white">
-            Add Changes
+          <button
+            className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
+              isChanged ? "bg-slate-700" : "bg-[#eeb71ff9]"
+            }`}
+            onClick={() => setIsChanged(!isChanged)}
+          >
+            {`${isChanged ? "Remove" : "Add"} Changes`}
           </button>
         </div>
       </header>
