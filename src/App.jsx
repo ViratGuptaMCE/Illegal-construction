@@ -151,7 +151,7 @@ function App() {
               position={[2, -0.3, -2.8]}
               // rotation={[-1 * Math.PI, 0, 0]}
             />
-            <RandomSite />
+            {isContructAdded && <RandomSite />}
             <ambientLight intensity={4} color={"orange"} />
             <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} />
             {/* <Tool scale={0.08} position={[3, -0.1, 2.5]} /> */}
