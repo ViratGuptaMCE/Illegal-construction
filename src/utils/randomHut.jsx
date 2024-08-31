@@ -43,7 +43,7 @@ const RandomHut = () => {
     case 4:
       return <Tent4 scale={0.3} position={pos} />;
     default:
-      return <Tent scale={0.001} position={pos} />;
+      return <Tent scale={0.0015} position={pos} />;
   }
   
 }

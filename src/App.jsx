@@ -177,9 +177,9 @@ function App() {
         </div>
         <div className="absolute bottom-5 right-4 w-fit overflow-hidden flex">
           <button
-            className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
+            className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white  ${
               isContructAdded ? "bg-slate-700" : "bg-[#1fb3eef9]"
-            }`}
+            } ${isChanged ? "pointer-events-none" : ""}`}
             onClick={() => setIsContructAdded(!isContructAdded)}
           >
             {`${isContructAdded ? "Remove" : "Add"} Construction Site`}
@@ -187,7 +187,7 @@ function App() {
           <button
             className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
               isChanged ? "bg-slate-700" : "bg-[#eeb71ff9]"
-            }`}
+            } ${isContructAdded ? "pointer-events-none" : ""}`}
             onClick={() => setIsChanged(!isChanged)}
           >
             {`${isChanged ? "Remove" : "Add"} Changes`}
