@@ -10,7 +10,8 @@ import { Tent2 } from './assets/models/tent2'
 import { Tent3 } from './assets/models/tent3'
 import { Tent4 } from './assets/models/tent4'
 import { Tent5 } from './assets/models/tent5'
-import { Tool } from './assets/models/constTool'
+import RandomSite from './utils/randomSite'
+// import { Tool } from './assets/models/constTool'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Environment } from '@react-three/drei'
 import JEASINGS from "https://esm.sh/jeasings";
@@ -18,7 +19,7 @@ import JEASINGS from "https://esm.sh/jeasings";
 
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [isContructAdded, setIsContructAdded] = useState(true)
   const camera = useRef();
   const control = useRef();
   function JEasings() {
@@ -101,6 +102,7 @@ function App() {
     <button
       key={title}
       type="reset"
+      className="w-full bg-[#eb3d3df9] font-extrabold text-center align-middle cursor-pointer px-3 py-1 m-2 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white"
       onClick={() => {
         // console.log(title, " clicked");
         new JEASINGS.JEasing(control.current.target)
@@ -135,11 +137,8 @@ function App() {
 
   return (
     <div className="App h-[100vh]">
-      <header className="App-header h-[100vh]">
-        <Canvas
-          className={`w-full h-screen bg-transparent
-          }`}
-        >
+      <header className="App-header h-[100vh] relative">
+        <Canvas className={`w-full h-screen bg-transparent`}>
           <Suspense fallback={<Loader />}>
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
             {/* <Stairs position={[200,0,400] } scale={0.1} /> */}
@@ -152,7 +151,8 @@ function App() {
               position={[2, -0.3, -2.8]}
               // rotation={[-1 * Math.PI, 0, 0]}
             />
-            <ambientLight intensity={4} color={'orange'}/>
+            <RandomSite />
+            <ambientLight intensity={4} color={"orange"} />
             <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} />
             {/* <Tool scale={0.08} position={[3, -0.1, 2.5]} /> */}
 
@@ -168,7 +168,24 @@ function App() {
             <JEasings />
           </Suspense>
         </Canvas>
-        <div id="ui">{buttons}</div>
+        <div id="ui" className="top-[50px] left-[10px] absolute w-[200px]">
+          {buttons}
+        </div>
+        <div className="absolute bottom-5 right-4 w-fit overflow-hidden flex">
+          <button
+            className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
+              isContructAdded ? "bg-slate-700" : "bg-[#1fb3eef9]"
+              }`}
+            onClick={()=>setIsContructAdded(!isContructAdded)}
+          >
+            {`${
+              isContructAdded ? "Remove" : "Add"
+            } Construction Site`}
+          </button>
+          <button className="w-full bg-[#eeb71ff9] font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white">
+            Add Changes
+          </button>
+        </div>
       </header>
     </div>
   );
