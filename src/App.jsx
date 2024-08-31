@@ -3,25 +3,29 @@ import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Loader from './utils/loader'
 import { City1 } from './assets/models/city1'
-import { Hut } from './assets/models/hut'
 import RandomHut from './utils/randomHut'
-import { Stairs } from './assets/models/stairs'
-import { Tent } from './assets/models/tent'
-import { Tent2 } from './assets/models/tent2'
-import { Tent3 } from './assets/models/tent3'
-import { Tent4 } from './assets/models/tent4'
-import { Tent5 } from './assets/models/tent5'
 import RandomSite from './utils/randomSite'
-// import { Tool } from './assets/models/constTool'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Environment } from '@react-three/drei'
 import JEASINGS from "https://esm.sh/jeasings";
 
-
+function checkVisibility(camPos, objPos) {
+  const dist =Math.pow((Math.pow(camPos.x - objPos[0], 2) +
+    Math.pow(camPos.y - objPos[1], 2) +
+    Math.pow(camPos.z - objPos[2], 2)),1/2);
+  if (dist < 3.5) return true;
+  return false;
+  // console.log(obj);
+}
 
 function App() {
   const [isContructAdded, setIsContructAdded] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const [isButton, setIsButton] = useState(false);
+  const [isPos, setPos] = useState([0, 0, 0]);
+  const [tentNo, setTentNo] = useState(0);
+  
+  
 
   const camera = useRef();
   const control = useRef();
@@ -30,45 +34,106 @@ function App() {
       JEASINGS.update();
     });
   }
-  const handleKeyDown = (event) => {
-    console.log(event.key, " clicked");
-    switch (event.key) {
-      case "ArrowUp":
-        if (Math.abs(camera.current.position.z - 0.2)<5){
-          camera.current.position.z -= 0.02;
-          control.current.target.z -= 0.02;
-        }
-        break;
-      case "ArrowDown":
-        if (Math.abs(camera.current.position.z + 0.2) < 5) {
-          camera.current.position.z += 0.02;
-          control.current.target.z += 0.02;
-        }
-        break;
-      case "ArrowLeft":
-        if (Math.abs(camera.current.position.x - 0.2) < 5){
-          camera.current.position.x -= 0.02;
-          control.current.target.x -= 0.02;
-        }
-        break;
-      case "ArrowRight":
-        if (Math.abs(camera.current.position.x + 0.2) < 5) {
-          camera.current.position.x += 0.02;
-          control.current.target.x += 0.02;
-        }
-        break;
-      default:
-        break;
-    }
-  };
-
+  // const handleKeyDown = (event) => {
+  //   // console.log(event.key, " clicked");
+  //   switch (event.key) {
+  //     case "ArrowUp":
+  //       if (Math.abs(camera.current.position.z - 0.2)<5){
+  //         camera.current.position.z -= 0.02;
+  //         control.current.target.z -= 0.02;
+  //       }
+  //       break;
+  //     case "ArrowDown":
+  //       if (Math.abs(camera.current.position.z + 0.2) < 5) {
+  //         camera.current.position.z += 0.02;
+  //         control.current.target.z += 0.02;
+  //       }
+  //       break;
+  //     case "ArrowLeft":
+  //       if (Math.abs(camera.current.position.x - 0.2) < 5){
+  //         camera.current.position.x -= 0.02;
+  //         control.current.target.x -= 0.02;
+  //       }
+  //       break;
+  //     case "ArrowRight":
+  //       if (Math.abs(camera.current.position.x + 0.2) < 5) {
+  //         camera.current.position.x += 0.02;
+  //         control.current.target.x += 0.02;
+  //       }
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   checkVisibility(camera.current.position, isPos);
+  // };
 
   useEffect(() => {
+    const posList = [
+      [
+        (Math.floor(Math.random() * 8) + 30) / 10,
+        -0.1,
+        (Math.floor(Math.random() * 6) + 18) / 10,
+      ],
+      [
+        (Math.floor(Math.random() * 35) - 15) / 10,
+        -0.1,
+        (Math.floor(Math.random() * -7) - 23) / 10,
+      ],
+      [
+        (Math.floor(Math.random() * -8) - 12) / 10,
+        -0.1,
+        (Math.floor(Math.random() * 6) + 22) / 10,
+      ],
+    ];
+    const pos = posList[Math.floor(Math.random() * 3)];
+    setPos(pos);
+    const tentNo = Math.floor(Math.random() * 5) + 1;
+    setTentNo(tentNo);
+    // setTentNo(Math.floor(Math.random() * 5) + 1);
+  }, [isChanged]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case "ArrowUp":
+          if (Math.abs(camera.current.position.z - 0.2) < 5) {
+            camera.current.position.z -= 0.02;
+            control.current.target.z -= 0.02;
+          }
+          break;
+        case "ArrowDown":
+          if (Math.abs(camera.current.position.z + 0.2) < 5) {
+            camera.current.position.z += 0.02;
+            control.current.target.z += 0.02;
+          }
+          break;
+        case "ArrowLeft":
+          if (Math.abs(camera.current.position.x - 0.2) < 5) {
+            camera.current.position.x -= 0.02;
+            control.current.target.x -= 0.02;
+          }
+          break;
+        case "ArrowRight":
+          if (Math.abs(camera.current.position.x + 0.2) < 5) {
+            camera.current.position.x += 0.02;
+            control.current.target.x += 0.02;
+          }
+          break;
+        default:
+          break;
+      }
+      if (checkVisibility(camera.current.position, isPos)) {
+        setIsButton(true);
+      } else {
+        setIsButton(false);
+      };
+    };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isPos]);
 
 
   const annotate = [
@@ -91,13 +156,13 @@ function App() {
       description: "<p>Looking from above.</p>",
       position: {
         x: 0,
-        y: 4,
-        z: 0,
+        y: 3,
+        z: 5,
       },
       lookAt: {
         x: 0,
-        y: 1,
-        z: 0,
+        y: 0,
+        z: 5,
       },
     },
   ];
@@ -144,21 +209,9 @@ function App() {
         <Canvas className={`w-full h-screen bg-transparent`}>
           <Suspense fallback={<Loader />}>
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
-            {isChanged && <RandomHut />}
-            {/* <Stairs position={[200,0,400] } scale={0.1} /> */}
+            {isChanged && <RandomHut pos={isPos} tent={tentNo} />}
 
-            {/* <Tent scale={0.001} position={[-1.5, -0.1, -3]} /> */}
-            {/* <Tent2 scale={0.007} position={[-1, -0.1, -3]} /> */}
-            {/* <Tent3 scale={0.001} position={[1, -0.1, -3]} /> */}
-            {/* <Tent4 scale={0.3} position={[1, -0.1, -3]} /> */}
             {isContructAdded && <RandomSite />}
-            {/* <Hut
-              scale={0.1}
-              position={[2, -0.3, -2.8]}
-              // rotation={[-1 * Math.PI, 0, 0]}
-            /> */}
-            {/* <ambientLight intensity={4} color={"orange"} /> */}
-            {/* <Tent5 scale={0.001} position={[3.8, -0.1, 1.8]} /> */}
 
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 6]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />
@@ -182,7 +235,7 @@ function App() {
             } ${isChanged ? "pointer-events-none" : ""}`}
             onClick={() => setIsContructAdded(!isContructAdded)}
           >
-            {`${isContructAdded ? "Remove" : "Add"} Construction Site`}
+            {`${isContructAdded ? "Remove" : "Add"} Constructing Site`}
           </button>
           <button
             className={`w-full  font-bold text-center align-middle cursor-pointer px-1 py-1 m-1 text-lg rounded-lg transition-all hover:opacity-75 hover:bg-slate-700 hover:text-white ${
@@ -193,6 +246,11 @@ function App() {
             {`${isChanged ? "Remove" : "Add"} Changes`}
           </button>
         </div>
+        {isButton && (
+          <button className="absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%] font-bold text-center align-middle cursor-pointer bg-green-600 px-1 py-1 m-1 text-lg rounded-lg border-4 animate-bounce">
+            Send Mail
+          </button>
+        )}
       </header>
     </div>
   );
