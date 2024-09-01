@@ -25,3 +25,4 @@ dist-ssr
 
 /src/camera.html
 *.alter.jsx
+*.alter.html

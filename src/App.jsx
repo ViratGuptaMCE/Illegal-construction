@@ -8,6 +8,7 @@ import RandomSite from './utils/randomSite'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Environment } from '@react-three/drei'
 import JEASINGS from "https://esm.sh/jeasings";
+import { CONSTR_SITES } from './constants'
 
 function checkVisibility(camPos, objPos) {
   const dist =Math.pow((Math.pow(camPos.x - objPos[0], 2) +
@@ -91,6 +92,11 @@ function App() {
     setTentNo(tentNo);
     // setTentNo(Math.floor(Math.random() * 5) + 1);
   }, [isChanged]);
+
+  useEffect(() => {
+    const pos = CONSTR_SITES[Math.floor(Math.random() * 3)];
+    setPos(pos);
+  },[isContructAdded])
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -211,7 +217,7 @@ function App() {
             <City1 position={[0, -0.5, -0]} scale={0.7} controls={control} />
             {isChanged && <RandomHut pos={isPos} tent={tentNo} />}
 
-            {isContructAdded && <RandomSite />}
+            {isContructAdded && <RandomSite pos={isPos} />}
 
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 6]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />
