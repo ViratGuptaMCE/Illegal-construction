@@ -1,0 +1,110 @@
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+
+export function City3(props) {
+  const { nodes, materials } = useGLTF("/models/isparta_city_block_turkey.glb");
+  return (
+    <group {...props} dispose={null}>
+      <group rotation={[-Math.PI, 0.665, 0]} scale={1.25}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_2.geometry}
+          material={materials["Isparta-block"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_3.geometry}
+          material={materials["Isparta-block1"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_4.geometry}
+          material={materials["Isparta-block10"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_5.geometry}
+          material={materials["Isparta-block11"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_6.geometry}
+          material={materials["Isparta-block12"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_7.geometry}
+          material={materials["Isparta-block13"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_8.geometry}
+          material={materials["Isparta-block14"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_9.geometry}
+          material={materials["Isparta-block15"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_10.geometry}
+          material={materials["Isparta-block2"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_11.geometry}
+          material={materials["Isparta-block3"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_12.geometry}
+          material={materials["Isparta-block4"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_13.geometry}
+          material={materials["Isparta-block5"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_14.geometry}
+          material={materials["Isparta-block6"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_15.geometry}
+          material={materials["Isparta-block7"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_16.geometry}
+          material={materials["Isparta-block8"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_17.geometry}
+          material={materials["Isparta-block9"]}
+        />
+      </group>
+    </group>
+  );
+}
+
+useGLTF.preload("/models/isparta_city_block_turkey.glb");
