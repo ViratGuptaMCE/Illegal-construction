@@ -2,7 +2,7 @@ import React from 'react'
 import { House3 } from '../assets/models/house3';
 import { House } from '../assets/models/house';
 
-const RandomHouse = () => {
+const RandomHouse = (props) => {
   const randNum = Math.floor(Math.random() * 2) + 1;
   const posList = [
     [-(Math.floor(Math.random() * 55) + 75) / 100, -0.35, -1.1],
@@ -11,7 +11,8 @@ const RandomHouse = () => {
   ];
   const randIndex = Math.floor(Math.random() * 3)
   const pos = posList[randIndex];
-  console.log(pos)
+  // console.log(pos)
+  props.Ref.current = pos;
   switch (randNum) {
     case 1:
       return (
