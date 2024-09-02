@@ -5,10 +5,15 @@ import Loader from "./utils/loader";
 import { City3 } from "./assets/models/city3";
 import RandomHut from "./utils/randomHut";
 import RandomSite from "./utils/randomSite";
+import { House } from "./assets/models/house";
+import { House2 } from "./assets/models/house2";
+import { House3 } from "./assets/models/house3";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Environment } from "@react-three/drei";
 import JEASINGS from "https://esm.sh/jeasings";
 import { CONSTR_SITES } from "./constants";
+import RandomHouse from "./utils/randomHouse";
+import RandomExtension from "./utils/randomExtension";
 
 function checkVisibility(camPos, objPos) {
   const dist = Math.pow(
@@ -230,9 +235,18 @@ function App2() {
               scale={0.05}
               controls={control}
             />
-            {/* {isChanged && <RandomHut pos={isPos} tent={tentNo} />}
+            {isChanged && <RandomHouse pos={isPos} tent={tentNo} />}
 
-            {isContructAdded && <RandomSite pos={isPos} />} */}
+            {isContructAdded && <RandomExtension pos={isPos} />}
+            {/* <House scale={0.0003} position={[-2.5, -0.3, -1.6]} /> */}
+            {/* <House2 scale={0.003} position={[-0.55,-0.5,0.2]} /> */}
+            {/* <House2
+              scale={0.003}
+              position={[-0.65, -0.5, -1.1]}
+              rotation={[0, -Math.PI / 2, 0]}
+            /> */}
+            {/* <House3 scale={0.03} position={[-0, -0.4, 2.45]} /> */}
+            <ambientLight intensity={4} />
 
             <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 4]} />
             <OrbitControls ref={control} target={[0, 0, 0]} />
@@ -267,7 +281,7 @@ function App2() {
             {`${isChanged ? "Remove" : "Add"} Changes`}
           </button>
         </div>
-        {isButton && (!arraysEqual(isPos, [0, 0, 0])) && (
+        {isButton && !arraysEqual(isPos, [0, 0, 0]) && (
           <button className="absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%] font-bold text-center align-middle cursor-pointer bg-green-600 px-1 py-1 m-1 text-lg rounded-lg border-4 animate-bounce">
             Send Mail
           </button>
