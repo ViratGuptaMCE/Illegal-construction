@@ -9,8 +9,8 @@ const RandomExtension = (props) => {
     { position: [-0.15, -0.5, 1], rotation: [0, Math.PI/2, 0] },
     { position: [-0.65, -0.5, -1.1], rotation: [0, -Math.PI/2, 0] },
   ];
-  const prop = propList[Math.floor(Math.random() * 4)];
-  props.Ref.current = prop.position;
+  const prop = props.pos;
+  // props.Ref.current = prop.position;
   return (
     <House2 scale={0.003} {...prop} />
   )

@@ -10,6 +10,12 @@ import RandomHouse from "./utils/randomHouse";
 import RandomExtension from "./utils/randomExtension";
 
 function checkVisibility(camPos, objPos) {
+  let threshold = 2.5;
+  if (!!(objPos.position)) {
+    objPos = objPos.position;
+    threshold = 2.6;
+  }
+  // console.log(objPos);
   const dist = Math.pow(
     Math.pow(camPos.x - objPos[0], 2) +
       Math.pow(camPos.y - objPos[1], 2) +
@@ -17,7 +23,7 @@ function checkVisibility(camPos, objPos) {
     1 / 2
   );
   console.log(dist)
-  if (dist < 2.5) return true;
+  if (dist < threshold) return true;
   return false;
   // console.log(obj);
 }
@@ -25,10 +31,9 @@ function checkVisibility(camPos, objPos) {
 function App2() {
   const [isContructAdded, setIsContructAdded] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
-  const isButton = useRef(false);
-  const posRef = useRef([0,0,0]);
-  // const [isPos, setPos] = useState([0, 0, 0]);
-  // const [tentNo, setTentNo] = useState(0);
+  const [isButton, setIsButton] = useState(false);
+  const [isPos, setPos] = useState([0, 0, 0]);
+  const [tentNo, setTentNo] = useState(0);
 
   const camera = useRef();
   const control = useRef();
@@ -84,7 +89,30 @@ function App2() {
   //   // setTentNo(Math.floor(Math.random() * 5) + 1);
   // }, [isChanged , isContructAdded]);
 
-  
+  useEffect(() => {
+    const posList = [
+      [-(Math.floor(Math.random() * 55) + 75) / 100, -0.35, -1.1],
+      [-(Math.floor(Math.random() * 2) + 0) / 10, -0.4, 2.45],
+      [-2.5, -0.3, -1.8],
+    ];
+    const randIndex = Math.floor(Math.random() * 3);
+    const pos = posList[randIndex];
+    setPos(pos);
+    const tentNo = Math.floor(Math.random() * 2) + 1;
+    setTentNo(tentNo);
+    // setTentNo(Math.floor(Math.random() * 5) + 1);
+  }, [isChanged]);
+
+  useEffect(() => {
+    const propList = [
+      { position: [-0.55, -0.5, 0.2], rotation: [0, 0, 0] },
+      { position: [-0.55, -0.5, 0.75], rotation: [0, Math.PI, 0] },
+      { position: [-0.15, -0.5, 1], rotation: [0, Math.PI / 2, 0] },
+      { position: [-0.65, -0.5, -1.1], rotation: [0, -Math.PI / 2, 0] },
+    ];
+    const prop = propList[Math.floor(Math.random() * 4)];
+    setPos(prop);
+  }, [isContructAdded]);
 
   
   useEffect(() => {
@@ -117,18 +145,17 @@ function App2() {
         default:
           break;
       }
-      if (checkVisibility(camera.current.position, posRef.current)) {
-        isButton.current = true;
-        console.log(isButton.current)
+      if (checkVisibility(camera.current.position, isPos)) {
+        setIsButton(true);
       } else {
-        isButton.current = false;
+        setIsButton(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isPos]);
 
   const annotate = [
     {
@@ -215,10 +242,10 @@ function App2() {
               scale={0.05}
               controls={control}
             />
-            {isChanged && <RandomHouse pos={posRef.current} Ref={posRef} />}
+            {isChanged && <RandomHouse pos={isPos} tentNo={tentNo} />}
 
             {isContructAdded && (
-              <RandomExtension pos={posRef.current} Ref={posRef} />
+              <RandomExtension pos={isPos} />
             )}
             {/* <House scale={0.0003} position={[-2.5, -0.3, -1.6]} /> */}
             {/* <House2 scale={0.003} position={[-0.55,-0.5,0.2]} /> */}
@@ -263,7 +290,7 @@ function App2() {
             {`${isChanged ? "Remove" : "Add"} Construction`}
           </button>
         </div>
-        {isButton.current && !arraysEqual(posRef.current, [0, 0, 0]) && (
+        {isButton && !arraysEqual(isPos, [0, 0, 0]) && (
           <button className="absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%] font-bold text-center align-middle cursor-pointer bg-green-600 px-1 py-1 m-1 text-lg rounded-lg border-4 animate-bounce">
             Send Mail
           </button>
