@@ -1,0 +1,368 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:"Arial", sans-serif;
+}
+
+/* Transparent navbar with better font color */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(255, 151, 99); /* Transparent background */
+    padding: 10px 20px;
+    color: #fff; /* White font color for better contrast */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Set a specific height for the navbar */
+    /* backdrop-filter: blur(10px); */
+     /* Optional: Adds a blur effect behind the navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Adjust logo alignment */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: auto; /* Pushes the logo to the left */
+    color: #fff; /* White color for logo */
+    letter-spacing: 1px;
+
+}
+
+/* Add a margin-top to the main content to prevent overlap */
+.main-content {
+    margin-top: 80px; /* Adjust this value according to the height of the navbar */
+}
+
+/* Style for navigation links */
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff; /* White font color */
+    font-size: 18px;
+    letter-spacing: 0.5px; /* Increase letter spacing */
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #e03b1e; /* Orange color on hover for better contrast */
+    border-bottom: 2px solid #dc614c; /* Add underline on hover */
+    transition: color 0.3s, border-bottom 0.3s;
+    transform: scale(1.05); /* Slightly enlarges the link */
+
+}
+
+body {
+  background: var(--background-gradient);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  transition: background 0.5s ease;
+}
+
+:root {
+  --background-gradient: linear-gradient(
+    to right,
+    #ff7e5f,
+    #feb47b
+  ); /* Light mode background */
+  --text-color: #333;
+  --form-background-color: #ffffff;
+  --form-text-color: #333;
+  --button-background-color: #ff4b2b;
+  --button-text-color: #ffffff;
+  --overlay-background-gradient:linear-gradient(to right, #ff4b2b, #ff416c);
+}
+
+body.dark-mode {
+  --background-gradient: linear-gradient(
+    to right,
+    #232526,
+    #414345
+  ); /* Dark mode background */
+  --text-color: #f6f5f7;
+  --form-background-color: #444;
+  --form-text-color: #f6f5f7;
+  --button-background-color: #ff416c;
+  --button-text-color: #ffffff;
+  --overlay-background-gradient: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.container {
+  background-color: var(--form-background-color);
+  color: var(--form-text-color);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  width: 900px; /* Increased width */
+  max-width: 100%;
+  min-height: 600px; /* Increased height */
+  overflow: hidden;
+  display: flex;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.sign-up-container {
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  opacity: 0;
+}
+
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+.overlay-container { 
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%; /* Keep it 50% to cover half of the form container */
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: var(--overlay-background-gradient);
+  background-repeat: no-repeat;
+  background-size: 200% 100%; /* Adjusted background size */
+  background-position: 0 0;
+  color: var(--button-text-color);
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out, background 0.5s ease;
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 30px; /* Adjusted padding */
+  height: 100%;
+  width: 45%; /* Adjusted width */
+  top: 0;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+form {
+  background-color: var(--form-background-color);
+  color: var(--form-text-color);
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+#welcomeback {
+  font-size: 40px;
+}
+
+#Hello {
+  font-size: 40px;
+}
+
+span {
+  font-size: 12px;
+  color: var(--form-text-color);
+  margin-bottom: 20px;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid var(--button-background-color);
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in, background-color 0.5s ease;
+  margin-top: 20px;
+}
+
+.btn-signin{
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.btn-signin:hover {
+  transform: translateY(-3px); /* Slightly raises the button */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Adds shadow on hover */
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+button:hover {
+  cursor: pointer;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: var(--button-text-color);
+
+}
+
+.social-container {
+  margin: 20px 0;
+}
+
+.social-container a {
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.overlay h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.overlay p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+a {
+  color: var(--form-text-color);
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+a:hover {
+  color: var(--button-background-color);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+}
+label {
+  display: flex;
+  align-items:center;
+  margin-bottom: 10px;
+  font-weight: lighter;
+}
+
+input[type="password"] {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  width: 15px;  /* Smaller checkbox size */
+  height: 15px;
+  margin-right: 5px;  /* Space between checkbox and text */
+  padding: 0;  /* Remove any padding */
+  vertical-align: middle;  /* Align with the text */
+
+}
+

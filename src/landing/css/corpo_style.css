@@ -1,0 +1,295 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  /* Header */
+  header {
+    background-color: #ff4b2b;
+    padding: 10px 20px;
+  }
+  
+  .main-text h1 {
+    font-size: 50px;
+    letter-spacing: 0.8px;
+    text-align: center;
+    font-weight: 500;
+    color: #444;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-text a {
+    font-size: 18.5px;
+    text-decoration: solid;
+    color: rgb(178, 2, 237);
+  }
+  
+  .main-text a:hover {
+    text-decoration: underline;
+  }
+  
+  .View_Area {
+    text-align: center;
+  }
+  
+  .View_Area button {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1a1a1a;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3b3b3b;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+  }
+  
+  .View_Area button:disabled {
+    pointer-events: none;
+  }
+  
+  .View_Area button:hover {
+    color: #fff;
+    background-color: #1a1a1a;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .View_Area button:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .lorem {
+    text-align: center;
+  }
+  
+  /* CSS */
+  .lorem button {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1a1a1a;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3b3b3b;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+  }
+  
+  .lorem button:disabled {
+    pointer-events: none;
+  }
+  
+  .lorem button:hover {
+    color: #fff;
+    background-color: #1a1a1a;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .lorem button:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo h1 {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main Information Section */
+  .main-info {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-bottom: 2px solid #e0e0e0;
+    flex: 1;
+  }
+  
+  .info-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f2eeff;
+    border-radius: 50px;
+  }
+  
+  .main-text img{
+      height:40px;
+      margin-left:10px;
+  }
+  
+  .main-text h1{
+      display: inline-block;
+  }
+  
+  .main-text h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .main-text p {
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    color: rgb(10, 109, 20);
+  }
+  
+  .useful-links h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  
+  .useful-links a {
+    display: block;
+    color: rgb(178, 2, 237);
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .useful-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Cards Section */
+  .cards-section {
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    margin-top: auto; /* This ensures the cards section stays at the bottom */
+  }
+  
+  .cards-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    position: relative; /* Added for the pseudo-element */
+  }
+  
+  /* Bluish Bar on Top of Cards */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px; /* Height of the bluish bar */
+    background: linear-gradient(to right, #eb3211, #d88456); /* Gradient effect */
+    border-radius: 8px 8px 0 0; /* Rounded corners */
+  }
+  
+  /* Card Title */
+  .card h3 {
+    font-size: 20px;
+    margin-top: 20px; /* Adjusted to accommodate the bluish bar */
+    margin-bottom: 10px;
+  }
+  
+  /* Card Description */
+  .card p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Footer or Bottom Placeholder (if needed) */
+  footer {
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto; /* Ensures footer is at the bottom */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .info-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .useful-links {
+      margin-top: 20px;
+    }
+  
+    .cards-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .card {
+      flex: 1 1 100%;
+    }
+  }
